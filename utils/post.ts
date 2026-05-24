@@ -2,7 +2,6 @@ import { promises as fs } from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { remark } from "remark";
-import { html } from "html";
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
 import rehypeSlug from 'rehype-slug';
@@ -33,7 +32,6 @@ export async function getPost(id: string) {
     const { data: frontmatter, content } = matter(markdownWithMeta);
 
     const processedContent = await remark()
-      .use(html, { sanitize: false })
       .use(remarkRehype)
       .use(rehypeSlug)
       .use(rehypeHighlight)
